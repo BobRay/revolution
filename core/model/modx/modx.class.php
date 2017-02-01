@@ -1570,8 +1570,9 @@ class modX extends xPDO {
      * @return bool|array
      */
     public function invokeEvent($eventName, array $params= array ()) {
-        if (!$eventName)
-            return false;
+        if ( !$eventName || xPDO::OPT_SETUP === true) {
+            return 'false';
+        }
         if ($this->eventMap === null && $this->context instanceof modContext)
             $this->_initEventMap($this->context->get('key'));
         if (!isset ($this->eventMap[$eventName])) {
